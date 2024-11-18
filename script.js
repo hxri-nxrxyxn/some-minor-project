@@ -1,6 +1,6 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-  import {  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+  import {  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyD6eHCSykQa3uVthV0H9_9IQV6ombClRds",
     authDomain: "shopping-38cd8.firebaseapp.com",
@@ -26,14 +26,31 @@
     }
   });
 
+  const signout = async () => {
+    try {
+      await auth.signOut()
+      console.log("User signed out successfully.");
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+    }
+  };
 
   const register = async (email,password) => {
       try {
-          const user = await createUserWithEmailAndPassword(auth,email.value,password.value);
+          var user = await createUserWithEmailAndPassword(auth,email.value,password.value);
           console.log(user);
         } catch (error) {
             alert(error.code);  
         }
     }
+
+    const login = async (email,password) => {
+        try {
+            var user = await signInWithEmailAndPassword(auth,email.value,password.value);
+            console.log(user);
+          } catch (error) {
+              alert(error.code);  
+          }
+      }
     
-    button.addEventListener("click",() => {register(email,password)});
+    button.addEventListener("click",signout);
