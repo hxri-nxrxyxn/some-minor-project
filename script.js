@@ -60,6 +60,9 @@
     
 if(location.href == "http://127.0.0.1:5500/loggedin.html" ){   
     logoutbtn.addEventListener("click",logout)
-}else{
+}else if(location.href == "http://127.0.0.1:5500/login.html"){
+    button.addEventListener("click",() => {login(email,password)});
+}
+else{
     button.addEventListener("click",() => {register(email,password)});
 }
