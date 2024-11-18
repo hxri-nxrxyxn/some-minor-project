@@ -1,6 +1,6 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-  import {  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+  import {  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyD6eHCSykQa3uVthV0H9_9IQV6ombClRds",
     authDomain: "shopping-38cd8.firebaseapp.com",
@@ -18,7 +18,15 @@
   const password = document.getElementById("password")
   const button = document.getElementById("button")
   
-  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log(user.uid)
+    } else {
+        alert('signed out')
+    }
+  });
+
+
   const register = async (email,password) => {
       try {
           const user = await createUserWithEmailAndPassword(auth,email.value,password.value);
