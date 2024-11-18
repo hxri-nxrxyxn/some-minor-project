@@ -16,18 +16,23 @@
 
   const email = document.getElementById("email")
   const password = document.getElementById("password")
-  const button = document.getElementById("button")
-  
+  if(location.href == "http://127.0.0.1:5500/loggedin.html" ){   
+    const logoutbtn = document.getElementById("logout")
+}else{
+    const button = document.getElementById("button")
+}
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user.uid)
+        if(location.href != "http://127.0.0.1:5500/loggedin.html")
+            location.href = "http://127.0.0.1:5500/loggedin.html" 
     } else {
-        alert('signed out')
+        if((location.href != "http://127.0.0.1:5500/login.html") && (location.href != "http://127.0.0.1:5500/register.html"))
+            location.href = "http://127.0.0.1:5500/login.html" 
     }
   });
 
-  const signout = async () => {
-    try {
+  const logout = async () => {
+    try { 
       await auth.signOut()
       console.log("User signed out successfully.");
     } catch (error) {
@@ -53,4 +58,8 @@
           }
       }
     
-    button.addEventListener("click",() => {login(email,password)});
+if(location.href == "http://127.0.0.1:5500/loggedin.html" ){   
+    logoutbtn.addEventListener("click",logout)
+}else{
+    button.addEventListener("click",() => {register(email,password)});
+}
