@@ -37,7 +37,7 @@
 
   const register = async (email,password) => {
       try {
-          var user = await createUserWithEmailAndPassword(auth,email.value,password.value);
+          const user = await createUserWithEmailAndPassword(auth,email.value,password.value);
           console.log(user);
         } catch (error) {
             alert(error.code);  
@@ -46,11 +46,11 @@
 
     const login = async (email,password) => {
         try {
-            var user = await signInWithEmailAndPassword(auth,email.value,password.value);
+            const user = await signInWithEmailAndPassword(auth,email.value,password.value);
             console.log(user);
           } catch (error) {
               alert(error.code);  
           }
       }
     
-    button.addEventListener("click",signout);
+    button.addEventListener("click",() => {login(email,password)});
